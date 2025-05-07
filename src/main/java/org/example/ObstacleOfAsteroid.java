@@ -15,6 +15,7 @@ public class ObstacleOfAsteroid extends JPanel {
     private int counterOfShooting = 0;
 
 
+
     public ObstacleOfAsteroid(JPanel parent) {
         this.parent = parent;
         Random random = new Random();
