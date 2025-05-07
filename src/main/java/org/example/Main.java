@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static final int WIDTH = 1200;
-    public static final int HEIGHT = 800;
+    public static final int HEIGHT = 700;
     public static final  StartScreen[] startScreen = new StartScreen[1];// יצירת מערך בגודל 1 שמכיל את מסך הפתיחה זה מאפשר גישה אליו מתוך המחלקה
 
     public static void main(String[] args) {

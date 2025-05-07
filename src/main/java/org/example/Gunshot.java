@@ -56,8 +56,6 @@ public class Gunshot extends JPanel {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
-
         }).start();
     }
 

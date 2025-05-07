@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 public class StartScreen extends JPanel{
     public StartScreen(ActionListener onStartClicked) {
         setLayout(null);
-        setBounds(0, 0, 1200, 800);
+        setBounds(0, 0, 1200, 700);
 
         // רקע (תמונה או צבע)
        JLabel background = new JLabel(new ImageIcon(getClass().getResource("/manu.png")));
-        background.setBounds(0, 0, 1200, 800);
+        background.setBounds(0, 0, 1200, 700);
         add(background);
 
         // כותרת המשחק

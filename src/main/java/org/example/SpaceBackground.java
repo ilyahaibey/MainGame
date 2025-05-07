@@ -17,7 +17,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
     public SpaceBackground() {
         backgroundImage = new ImageIcon(getClass().getResource("/space1.png")).getImage();
         this.setLayout(null);
-        this.setBounds(0, 0, 1200, 800);
+        this.setBounds(0, 0, 1200, 700);
 
         playerRocet = new Player();
         this.add(playerRocet);
@@ -96,17 +96,14 @@ public class SpaceBackground extends JPanel implements KeyListener {
                     for (ObstacleOfAsteroid asteroid : asteroids) {
                         if (!lifes.isEmpty()) {
                             if (playerRocet.getBounds().intersects(asteroid.getBounds())) {
+                                System.out.println("ONE");
 
                                 PlayerExplotion explosion = new PlayerExplotion(this);
+
                                 add(explosion);
                                 explosion.startExplosion(playerRocet.getX(), playerRocet.getY());
-                                for (ObstacleOfAsteroid asteroid1 : asteroids){
 
-                                    this.remove(asteroid1);
-                                    repaint();
-
-
-                                }
+                                removeAllAsteroid();
 
 
                                 playerRocet.setVisible(false);
@@ -114,13 +111,16 @@ public class SpaceBackground extends JPanel implements KeyListener {
                                 Thread.sleep(600);
                                 playerRocet.setVisible(true);
 
+
                                 Life lostLife = lifes.remove(lifes.size() - 1);
                                 remove(lostLife);
                                 repaint();
                                 break;
+
                             }
                         }
                     }
+
                     if (lifes.isEmpty()) {
                         gameOverShown = true;
                         GameOver gameOver = new GameOver();
@@ -151,23 +151,54 @@ public class SpaceBackground extends JPanel implements KeyListener {
     public void hittingInAsteroid() {
         new Thread(() -> {
             try {
+                while (true) {
 
-                for (Gunshot shot : this.shots) {
-                    for (ObstacleOfAsteroid asteroid : asteroids) {
-                        if (asteroid.getBounds().intersects(shot.getBounds())){
-                            asteroid.counter();
-                        }
-                        if (asteroid.getCounterOfShooting() == 3){
-                            asteroid.removeAll();
+                    ArrayList<Gunshot> shotsToRemove = new ArrayList<>();
+                    ArrayList<ObstacleOfAsteroid> asteroidsToRemove = new ArrayList<>();
+
+                    for (Gunshot shot : new ArrayList<>(shots)) {
+                        for (ObstacleOfAsteroid asteroid : new ArrayList<>(asteroids)) {
+                            if (asteroid.getBounds().intersects(shot.getBounds())) {
+                                System.out.println("ONE");
+
+                                asteroid.counter();
+                                shotsToRemove.add(shot);
+
+                                if (asteroid.getCounterOfShooting() >= 9) {
+                                    asteroidsToRemove.add(asteroid);
+                                }
+                            }
                         }
                     }
-                }
 
-                Thread.sleep(20);
+                    // הסרת יריות
+                    for (Gunshot shot : shotsToRemove) {
+                        shots.remove(shot);
+                        remove(shot);
+                    }
+
+                    // הסרת אסטרואידים
+                    for (ObstacleOfAsteroid asteroid : asteroidsToRemove) {
+                        asteroids.remove(asteroid);
+                        remove(asteroid);
+                    }
+
+                    repaint(); // עדכון גרפי
+                    Thread.sleep(20);
+
+                }
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                Thread.currentThread().interrupt();
             }
         }).start();
-
     }
+    public void removeAllAsteroid() {
+        for (int i = asteroids.size() - 1; i >= 0; i--) {
+            ObstacleOfAsteroid curentAsteroid = asteroids.get(i);
+            this.remove(curentAsteroid);   // הסרה מהמסך
+            asteroids.remove(i);     // הסרה מהלוגיקה
+        }
+        repaint();  // רענון אחרי הכל
+    }
+
 }

@@ -14,11 +14,11 @@ public class GameOver extends JPanel {
     public GameOver(){
         gameOverImage = new ImageIcon(getClass().getResource("/gameover.png")).getImage();
         this.setLayout(null);
-        this.setBounds(0, 0, 1200, 800);
+        this.setBounds(0, 0, 1200, 700);
         JButton playAgain = new JButton("play again");
         playAgain.setFont(new Font("Arial", Font.BOLD, 30));
         playAgain.setLayout(null);
-        playAgain.setBounds(1000/2 , 500 , 300 ,200);
+        playAgain.setBounds(500 , 50 , 300 ,100);
         this.add(playAgain);
 
 

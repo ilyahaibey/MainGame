@@ -50,9 +50,11 @@ public class PlayerExplotion extends JPanel {
                 // מסיימים - מסירים את הפאנל מהמסך
                 parent.remove(this);
                 parent.repaint();
+
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }).start();
     }
+
 }
