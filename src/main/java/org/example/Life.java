@@ -9,8 +9,6 @@ public class Life extends JPanel {
     public static final int Y_LOCATION = 0 ;
 
 
-
-
     private int y = Y_LOCATION ;
     private int x ;
     private  int width = WIDTH ;

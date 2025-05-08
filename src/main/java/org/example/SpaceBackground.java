@@ -62,39 +62,39 @@ public class SpaceBackground extends JPanel implements KeyListener {
             }
         }).start();
 
-        new Thread(() -> {
-            try {
-                while (true) {
-                    if (keysPressed.contains(KeyEvent.VK_SPACE) && canShoot) {
-                        canShoot = false;
-
-                        Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
-                        shots.add(shot);
-                        this.add(shot);
-                        shot.shotFromPlayer();
-
-                        Sound gunSound = new Sound("src/main/resources/ירי.wav");
-                        gunSound.explosionSound();
-
-                        repaint();
-
-                        // מחכים קצת ואז מתירים ירי נוסף
-                        new Thread(() -> {
-                            try {
-                                Thread.sleep(300); // זמן המתנה לפני שירייה נוספת מותרת
-                                canShoot = true;
-                            } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                            }
-                        }).start();
-                    }
-
-                    Thread.sleep(10); // בדיקה מהירה אם רווח לחוץ
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }).start();
+//        new Thread(() -> {
+//            try {
+//                while (true) {
+//                    if (keysPressed.contains(KeyEvent.VK_SPACE) && canShoot) {
+//                        canShoot = false;
+//
+//                        Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
+//                        shots.add(shot);
+//                        this.add(shot);
+//                        shot.shotFromPlayer();
+//
+//                        Sound gunSound = new Sound("src/main/resources/פיצוץ.wav");
+//                        gunSound.explosionSound();
+//
+//                        repaint();
+//
+//                        // מחכים קצת ואז מתירים ירי נוסף
+//                        new Thread(() -> {
+//                            try {
+//                                Thread.sleep(300); // זמן המתנה לפני שירייה נוספת מותרת
+//                                canShoot = true;
+//                            } catch (InterruptedException e) {
+//                                Thread.currentThread().interrupt();
+//                            }
+//                        }).start();
+//                    }
+//
+//                    Thread.sleep(10); // בדיקה מהירה אם רווח לחוץ
+//                }
+//            } catch (InterruptedException e) {
+//                Thread.currentThread().interrupt();
+//            }
+//        }).start();
 
         treeLife();
         repaint();
@@ -122,27 +122,21 @@ public class SpaceBackground extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_DOWN) {
             playerRocet.move(0, 1);
         }
-        // איליה למה לא עובד לך
-
-
-
-
 
 // הורדה
-//        if (key == KeyEvent.VK_SPACE) {
-//            Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
-//            shots.add(shot);
-//            this.add(shot);
-//            shot.shotFromPlayer();
-//            Sound gunSound = new Sound("/ירי.wav");
-//            gunSound.explosionSound();
-//            repaint();
-//            //
+        if (key == KeyEvent.VK_SPACE) {
+            Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
+            shots.add(shot);
+            this.add(shot);
+            shot.shotFromPlayer();
+          //  Sound gunSound = new Sound("/ירי.wav");
+           // gunSound.explosionSound();
+            repaint();
+            //
             keysPressed.add(e.getKeyCode());
-
+        }
 //        }
     }
-
 
     public void keyReleased(KeyEvent e) {//לחוץ
         keysPressed.remove(e.getKeyCode());
@@ -246,14 +240,13 @@ public class SpaceBackground extends JPanel implements KeyListener {
                                 shotsToRemove.add(shot);
 
                                 if (asteroid.getCounterOfShooting() >= 9) {
-                                    Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
-                                    explosion.explosionSound();
+                                   // Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
+                                    //explosion.explosionSound();
                                     asteroidsToRemove.add(asteroid);
                                 }
                             }
                         }
                     }
-
                     // הסרת יריות
                     for (Gunshot shot : shotsToRemove) {
                         shots.remove(shot);
