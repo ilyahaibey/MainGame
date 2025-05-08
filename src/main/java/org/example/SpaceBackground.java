@@ -30,7 +30,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         asteroids = new ArrayList<>();
         lifes = new ArrayList<>();
 
-         xp = new Xp();
+        xp = new Xp();
         this.add(xp);
 
 
@@ -186,6 +186,8 @@ public class SpaceBackground extends JPanel implements KeyListener {
                     for (ObstacleOfAsteroid asteroid : asteroidsToRemove) {
                         asteroids.remove(asteroid);
                         remove(asteroid);
+                        xp.addXp();
+
                     }
 
                     repaint(); // עדכון גרפי

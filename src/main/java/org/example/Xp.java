@@ -17,31 +17,28 @@ public class Xp extends JPanel {
     private int y = Y ;
     private int hight = HIGHT ;
     private int whidh = WHIDHT;
+    private JLabel xpText ;
 
 
     public Xp() {
         this.setLayout(null);
         this.setBounds(20, 20, 200, 50);
         this.setOpaque(false);
-        this.xp = 20;
+        this.xp = 0;
 
-        JLabel xpText = new JLabel(String.valueOf(this.xp));
+        JLabel xpText = new JLabel("XP : "+String.valueOf(this.xp));
+        this.xpText = xpText ;
         xpText.setBounds(0, 0, 200, 50);
-        xpText.setFont(new Font("Arial", Font.PLAIN, 24));
-        xpText.setForeground(Color.WHITE);
-
+        xpText.setFont(new Font("Monospaced", Font.BOLD, 28));
+        xpText.setForeground(Color.CYAN);
 
         this.add(xpText);
-
-
-
-
-
     }
-
 
     public void addXp(){
         this.xp+=10 ;
+        this.xpText.setText("XP : "+String.valueOf(this.xp));
+
     }
 
 }
