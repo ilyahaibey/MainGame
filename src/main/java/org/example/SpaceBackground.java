@@ -159,7 +159,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
                     for (Gunshot shot : new ArrayList<>(shots)) {
                         for (ObstacleOfAsteroid asteroid : new ArrayList<>(asteroids)) {
                             if (asteroid.getBounds().intersects(shot.getBounds())) {
-                                System.out.println("ONE");
 
                                 asteroid.counter();
                                 shotsToRemove.add(shot);
