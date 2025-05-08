@@ -35,8 +35,11 @@ public class Main {
         startScreen[0].setBounds(0, 0, WIDTH, HEIGHT);
         window.add(startScreen[0]);
 
-        Sound sound= new Sound("src/main/resources/song.mp3");
-        sound.backgroundMusic();
+        Sound sound1= new Sound("src/main/resources/sound2.wav");
+        sound1.backgroundMusic();
+
+
+
 
 //        startScreen[0] = new StartScreen(new ActionListener() { // יצירת אובייקט של מסך הפתיחה עם מאזין לחיצה על כפתור התחלה
 //            public void actionPerformed(ActionEvent e){// פעולות כשאר לוחצים על כפתור ההחל

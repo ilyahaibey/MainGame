@@ -56,6 +56,8 @@ public class SpaceBackground extends JPanel implements KeyListener {
             shots.add(shot);
             this.add(shot);
             shot.shotFromPlayer();
+            Sound gunSound=new Sound("src/main/resources/ירי.wav");
+            gunSound.explosionSound();
             repaint();
         }
 
@@ -164,6 +166,8 @@ public class SpaceBackground extends JPanel implements KeyListener {
                                 shotsToRemove.add(shot);
 
                                 if (asteroid.getCounterOfShooting() >= 9) {
+                                    Sound explosion= new Sound( "src/main/resources/פיצוץ.wav");
+                                    explosion.explosionSound();
                                     asteroidsToRemove.add(asteroid);
                                 }
                             }
