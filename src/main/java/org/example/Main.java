@@ -41,21 +41,6 @@ public class Main {
 
 
 
-//        startScreen[0] = new StartScreen(new ActionListener() { // יצירת אובייקט של מסך הפתיחה עם מאזין לחיצה על כפתור התחלה
-//            public void actionPerformed(ActionEvent e){// פעולות כשאר לוחצים על כפתור ההחל
-//                window.remove(startScreen[0]);// הסרת המסך הפתיחה מהחלון
-//                window.add(background);//הוספת מסך המשחק במקום
-//                window.revalidate();//עדכון מבנה המסך החדש
-//                window.repaint();//רענון גרפי של המסך
-//                background.requestFocusInWindow();// נותן פוקוס למסך המשחק
-//
-//            }
-//
-//        });
-//
-//       // startScreen[0].setBounds(0, 0, WIDTH, HEIGHT);// קביעת גודל
-//        //window.add(startScreen[0]); // הוספת מסך הפתיחה לחלון
-
        window.setVisible(true);
 
 

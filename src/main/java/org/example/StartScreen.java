@@ -5,7 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class StartScreen extends JPanel{
+    private Image instructions ;
+
+
+
+
     public StartScreen(ActionListener onStartClicked) {
+
+
+
+        instructions = new ImageIcon(getClass().getResource("/inst.png")).getImage();
+
         setLayout(null);
         setBounds(0, 0, 1200, 700);
 
@@ -22,30 +32,20 @@ public class StartScreen extends JPanel{
         background.add(title);
 
 
-
-        // הוראות
-        JTextArea instructions = new JTextArea(
-                "Instructions:\n" +
-                        "• Use the arrow keys to move your spaceship.\n" +
-                        "• Press the spacebar to shoot.\n" +
-                        "• Avoid the asteroids!\n" +
-                        "• You have 3 lives — don't lose them all!\n" +
-                        "• Good luck, pilot!\n\n"
-
-        );
-        instructions.setFont(new Font("Arial", Font.PLAIN, 20));
-        instructions.setForeground(Color.WHITE);
-        instructions.setBackground(new Color(0, 0, 0, 0)); // שקוף
-        instructions.setEditable(false);
-        instructions.setBounds(350, 200, 500, 200);
-        background.add(instructions);
-
-        // כפתור Start
         JButton startButton = new JButton("Start Game");
         startButton.setFont(new Font("Arial", Font.BOLD, 30));
         startButton.setBounds(450, 450, 300, 70);
         startButton.addActionListener(onStartClicked);
         background.add(startButton);
+
+        JButton instructionsB  = new JButton("instructions");
+        instructionsB.setFont(new Font("Arial", Font.BOLD, 30));
+        instructionsB.setBounds(450, 520, 300, 70);
+        instructionsB.addActionListener(onStartClicked);
+        background.add(instructionsB);
+        startButton.addActionListener(e -> {
+
+        });
     }
 }
 
