@@ -7,12 +7,14 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class SpaceBackground extends JPanel implements KeyListener {
+    private final java.util.Set<Integer> keysPressed = new java.util.HashSet<>();
+    private boolean canShoot = true;
     private Image backgroundImage;
     private Player playerRocet;
     private ArrayList<Gunshot> shots;
     private ArrayList<ObstacleOfAsteroid> asteroids;
     private ArrayList<Life> lifes;
-    private Xp xp ;
+    private Xp xp;
     private boolean gameOverShown = false;
 
     public SpaceBackground() {
@@ -34,16 +36,70 @@ public class SpaceBackground extends JPanel implements KeyListener {
         this.add(xp);
 
 
-
         this.setFocusable(true);
         this.addKeyListener(this);
         this.requestFocusInWindow();
 
+
+        new Thread(() -> {
+            try {
+                while (true) {
+                    int dx = 0, dy = 0;
+
+                    if (keysPressed.contains(KeyEvent.VK_LEFT)) dx = -1;
+                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) dx = 1;
+                    if (keysPressed.contains(KeyEvent.VK_UP)) dy = -1;
+                    if (keysPressed.contains(KeyEvent.VK_DOWN)) dy = 1;
+
+                    if (dx != 0 || dy != 0) {
+                        playerRocet.move(dx, dy);
+                    }
+
+                    Thread.sleep(20);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                while (true) {
+                    if (keysPressed.contains(KeyEvent.VK_SPACE) && canShoot) {
+                        canShoot = false;
+
+                        Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
+                        shots.add(shot);
+                        this.add(shot);
+                        shot.shotFromPlayer();
+
+                        Sound gunSound = new Sound("src/main/resources/ירי.wav");
+                        gunSound.explosionSound();
+
+                        repaint();
+
+                        // מחכים קצת ואז מתירים ירי נוסף
+                        new Thread(() -> {
+                            try {
+                                Thread.sleep(300); // זמן המתנה לפני שירייה נוספת מותרת
+                                canShoot = true;
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                            }
+                        }).start();
+                    }
+
+                    Thread.sleep(10); // בדיקה מהירה אם רווח לחוץ
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
+
         treeLife();
-        addAsteroids();       // מתחיל להציף אסטרואידים
-        playerDead();         // מתחיל לבדוק התנגשות
-        hittingInAsteroid();  // בודק התנגשות כדור בסטרואיד
         repaint();
+
+
     }
 
     protected void paintComponent(Graphics g) {
@@ -53,28 +109,45 @@ public class SpaceBackground extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_LEFT) playerRocet.move(-1, 0);
-        if (key == KeyEvent.VK_RIGHT) playerRocet.move(1, 0);
-        if (key == KeyEvent.VK_UP) playerRocet.move(0, -1);
-        if (key == KeyEvent.VK_DOWN) playerRocet.move(0, 1);
-
-        if (key == KeyEvent.VK_SPACE) {
-            Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
-            shots.add(shot);
-            this.add(shot);
-            shot.shotFromPlayer();
-            Sound gunSound=new Sound("src/main/resources/ירי.wav");
-            gunSound.explosionSound();
-            repaint();
+        keysPressed.add(key); // שומר את המקש הלחוץ (גם לתנועה)
+        if (key == KeyEvent.VK_LEFT) {
+            playerRocet.move(-1, 0);
+        }
+        if (key == KeyEvent.VK_RIGHT) {
+            playerRocet.move(1, 0);
+        }
+        if (key == KeyEvent.VK_UP) {
+            playerRocet.move(0, -1);
+        }
+        if (key == KeyEvent.VK_DOWN) {
+            playerRocet.move(0, 1);
         }
 
 
+
+
+
+// הורדה
+//        if (key == KeyEvent.VK_SPACE) {
+//            Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
+//            shots.add(shot);
+//            this.add(shot);
+//            shot.shotFromPlayer();
+//            Sound gunSound = new Sound("/ירי.wav");
+//            gunSound.explosionSound();
+//            repaint();
+//            //
+            keysPressed.add(e.getKeyCode());
+
+//        }
     }
 
-    public void keyReleased(KeyEvent e) {
+
+    public void keyReleased(KeyEvent e) {//לחוץ
+        keysPressed.remove(e.getKeyCode());
     }
 
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e) {//לא לחוץ
     }
 
     public void addAsteroids() {
@@ -172,7 +245,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
                                 shotsToRemove.add(shot);
 
                                 if (asteroid.getCounterOfShooting() >= 9) {
-                                    Sound explosion= new Sound( "src/main/resources/פיצוץ.wav");
+                                    Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
                                     explosion.explosionSound();
                                     asteroidsToRemove.add(asteroid);
                                 }
@@ -203,6 +276,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
             }
         }).start();
     }
+
     public void removeAllAsteroid() {
         for (int i = asteroids.size() - 1; i >= 0; i--) {
             ObstacleOfAsteroid curentAsteroid = asteroids.get(i);
@@ -211,5 +285,12 @@ public class SpaceBackground extends JPanel implements KeyListener {
         }
         repaint();  // רענון אחרי הכל
     }
+
+    public void startGame() {
+        addAsteroids(); // מתחיל להציף אסטרואידים
+        playerDead(); // מתחיל לבדוק התנגשות
+        hittingInAsteroid(); // בודק התנגשות כדור בסטרואיד
+    }
+
 
 }

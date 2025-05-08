@@ -30,13 +30,14 @@ public class Main {
             window.revalidate();
             window.repaint();
             background.requestFocusInWindow(); // כדי שהמקלדת תעבוד
+            background.startGame();
         });
 
         startScreen[0].setBounds(0, 0, WIDTH, HEIGHT);
         window.add(startScreen[0]);
 
-        Sound sound1= new Sound("src/main/resources/sound2.wav");
-        sound1.backgroundMusic();
+//        Sound sound1= new Sound("src/main/resources/sound2.wav");
+//        sound1.backgroundMusic();
 
 
 
