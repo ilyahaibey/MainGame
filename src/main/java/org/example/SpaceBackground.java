@@ -122,6 +122,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_DOWN) {
             playerRocet.move(0, 1);
         }
+        // איליה למה לא עובד לך
 
 
 
