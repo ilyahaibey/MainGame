@@ -12,6 +12,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
     private ArrayList<Gunshot> shots;
     private ArrayList<ObstacleOfAsteroid> asteroids;
     private ArrayList<Life> lifes;
+    private Xp xp ;
     private boolean gameOverShown = false;
 
     public SpaceBackground() {
@@ -29,6 +30,11 @@ public class SpaceBackground extends JPanel implements KeyListener {
         asteroids = new ArrayList<>();
         lifes = new ArrayList<>();
 
+         xp = new Xp();
+        this.add(xp);
+
+
+
         this.setFocusable(true);
         this.addKeyListener(this);
         this.requestFocusInWindow();
@@ -37,6 +43,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         addAsteroids();       // מתחיל להציף אסטרואידים
         playerDead();         // מתחיל לבדוק התנגשות
         hittingInAsteroid();  // בודק התנגשות כדור בסטרואיד
+        repaint();
     }
 
     protected void paintComponent(Graphics g) {
@@ -96,7 +103,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
                     for (ObstacleOfAsteroid asteroid : asteroids) {
                         if (!lifes.isEmpty()) {
                             if (playerRocet.getBounds().intersects(asteroid.getBounds())) {
-                                System.out.println("ONE");
 
                                 PlayerExplotion explosion = new PlayerExplotion(this);
 
