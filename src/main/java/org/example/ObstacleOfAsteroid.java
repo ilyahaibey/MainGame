@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class ObstacleOfAsteroid extends JPanel {
+    public static final int FALL_DELAY_MS=80;
     private int x;
     private int y;
     private Image AsteroidPhoto;
@@ -55,7 +56,7 @@ public class ObstacleOfAsteroid extends JPanel {
             try {
                 while (!isOutOfScreen()) {
                     this.setLocation(getX(), getY() + speed);
-                    Thread.sleep(80);
+                    Thread.sleep(FALL_DELAY_MS);
                     repaint();
                     changePhoto();
                 }

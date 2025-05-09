@@ -7,6 +7,8 @@ public class Life extends JPanel {
     public static final int HEIGHT = 30 ;
     public static final int WIDTH = 30 ;
     public static final int Y_LOCATION = 0 ;
+    public static final int X= 0;
+    public static final int Y=0;
 
 
     private int y = Y_LOCATION ;
@@ -28,7 +30,7 @@ public class Life extends JPanel {
     }
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(life, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(life, X, Y, getWidth(), getHeight(), this);
 
     }
 

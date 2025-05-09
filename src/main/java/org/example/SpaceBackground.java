@@ -40,27 +40,27 @@ public class SpaceBackground extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.requestFocusInWindow();
 
-
-        new Thread(() -> {
-            try {
-                while (true) {
-                    int dx = 0, dy = 0;
-
-                    if (keysPressed.contains(KeyEvent.VK_LEFT)) dx = -1;
-                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) dx = 1;
-                    if (keysPressed.contains(KeyEvent.VK_UP)) dy = -1;
-                    if (keysPressed.contains(KeyEvent.VK_DOWN)) dy = 1;
-
-                    if (dx != 0 || dy != 0) {
-                        playerRocet.move(dx, dy);
-                    }
-
-                    Thread.sleep(20);
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }).start();
+        //באג
+//        new Thread(() -> {
+//            try {
+//                while (true) {
+//                    int dx = 0, dy = 0;
+//
+//                    if (keysPressed.contains(KeyEvent.VK_LEFT)) dx = -1;
+//                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) dx = 1;
+//                    if (keysPressed.contains(KeyEvent.VK_UP)) dy = -1;
+//                    if (keysPressed.contains(KeyEvent.VK_DOWN)) dy = 1;
+//
+//                    if (dx != 0 || dy != 0) {
+//                        playerRocet.move(dx, dy);
+//                    }
+//
+//                    Thread.sleep(20);
+//                }
+//            } catch (InterruptedException e) {
+//                Thread.currentThread().interrupt();
+//            }
+//        }).start();
 
 //        new Thread(() -> {
 //            try {
@@ -95,12 +95,38 @@ public class SpaceBackground extends JPanel implements KeyListener {
 //                Thread.currentThread().interrupt();
 //            }
 //        }).start();
-
+        startMovementThread();
         treeLife();
         repaint();
 
 
     }
+
+
+    private void startMovementThread() {
+        new Thread(() -> {
+            try {
+                while (true) {
+                    int dx = 0, dy = 0;
+
+                    if (keysPressed.contains(KeyEvent.VK_LEFT)) dx = -1;
+                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) dx = 1;
+                    if (keysPressed.contains(KeyEvent.VK_UP)) dy = -1;
+                    if (keysPressed.contains(KeyEvent.VK_DOWN)) dy = 1;
+
+                    if (dx != 0 || dy != 0) {
+                        playerRocet.move(dx, dy);
+                    }
+
+                    Thread.sleep(20);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
+    }
+
+
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -279,7 +305,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         }
         repaint();  // רענון אחרי הכל
     }
-
+/// כפתור התחלה
     public void startGame() {
         addAsteroids(); // מתחיל להציף אסטרואידים
         playerDead(); // מתחיל לבדוק התנגשות

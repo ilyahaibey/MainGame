@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class Player extends JPanel   {
+    public static final int X= 0;
+    public static final int Y=0;
     private int x;
     private int y;
     private int width;
@@ -39,7 +41,7 @@ public class Player extends JPanel   {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(playerImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(playerImage, X, Y, getWidth(), getHeight(), this);
 
     }
 

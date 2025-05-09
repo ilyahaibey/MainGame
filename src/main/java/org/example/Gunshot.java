@@ -7,7 +7,7 @@ public class Gunshot extends JPanel {
     public static final int HEIGHT = 40 ;
     public static final int WIDTH = 100 ;
     public static final int SPEED = 80;
-//    public static final int = 50;
+    public static final int  SHOOT_INTERVAL_MS= 50;
 
 
         private int y;
@@ -46,7 +46,7 @@ public class Gunshot extends JPanel {
             try {
                 while (!isOutOfScreen()) {
                     this.setLocation(getX() , getY()-speed);
-                    Thread.sleep(50);
+                    Thread.sleep(SHOOT_INTERVAL_MS);
                     repaint();
 
                 }
