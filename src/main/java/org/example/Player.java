@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class Player extends JPanel   {
+    public static final int X= 0;
+    public static final int Y=0;
     private int x;
     private int y;
     private int width;
@@ -22,7 +24,7 @@ public class Player extends JPanel   {
 
         this.width = 150;   // רוחב
         this.height = 150;  // אורך
-        this.y = 800 - height;
+        this.y = 700 - height;
         this.x = (1200 - width) / 2;
         this.speed = 25;    // מהירות
         this.lives = 3;
@@ -39,7 +41,7 @@ public class Player extends JPanel   {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(playerImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(playerImage, X, Y, getWidth(), getHeight(), this);
 
     }
 
@@ -50,7 +52,7 @@ public class Player extends JPanel   {
         if (x > 1220 - width) x = 1220 - width;
 
         if (y < 0) y = 0;
-        if (y > 800 - height) y = 800 - height;
+        if (y > 700 - height) y = 700 - height;
 
         setBounds(x, y, width, height);
         repaint();
@@ -80,12 +82,6 @@ public class Player extends JPanel   {
         return new Rectangle(getX() + offsetX, getY() + offsetY, reducedWidth, reducedHeight);
     }
 
-
-    public void revive(){
-
-
-
-    }
 }
 
 

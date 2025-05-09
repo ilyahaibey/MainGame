@@ -37,6 +37,9 @@ public class Sound {
             clip.stop(); // עצור את הצליל
         }
     }
+    public Clip getClip() {
+        return clip;
+    }
 
 
 }

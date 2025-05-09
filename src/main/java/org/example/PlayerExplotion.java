@@ -6,6 +6,8 @@ import java.awt.*;
 public class PlayerExplotion extends JPanel {
     public static final int WIDTH = 150;
     public static final int HEIGHT = 150;
+    public static final int X= 0;
+    public static final int Y=0;
 
     private Image[] explosions;      // מערך של תמונות הפיצוץ בשלבים
     private int currentFrame = 0;    // באיזה שלב הפיצוץ אנחנו
@@ -22,7 +24,7 @@ public class PlayerExplotion extends JPanel {
         };
 
         setLayout(null);
-        setBounds(0, 0, WIDTH, HEIGHT);
+        setBounds(X, Y, WIDTH, HEIGHT);
         setOpaque(false); // חשוב כדי לא להסתיר דברים אחרים
     }
 
@@ -30,7 +32,7 @@ public class PlayerExplotion extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (currentFrame < explosions.length) {
-            g.drawImage(explosions[currentFrame], 0, 0, getWidth(), getHeight(), this);
+            g.drawImage(explosions[currentFrame], X, Y, getWidth(), getHeight(), this);
         }
     }
 
@@ -50,9 +52,11 @@ public class PlayerExplotion extends JPanel {
                 // מסיימים - מסירים את הפאנל מהמסך
                 parent.remove(this);
                 parent.repaint();
+
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }).start();
     }
+
 }
