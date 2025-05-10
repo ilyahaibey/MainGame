@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class StartScreen extends JPanel {
-    // משתנים קבועים לכותרת
+    // משתניפ קבועים לכותרת
     public static final int TITLE_WIDTH = 500;
     public static final int TITLE_HEIGHT = 300;
     public static final int TITLE_X = (1200 - TITLE_WIDTH) / 2;
@@ -44,6 +44,7 @@ public class StartScreen extends JPanel {
         startButton.setFocusPainted(false);
         startButton.addActionListener(onStartClicked);
         background.add(startButton);
+
 
 
         // כפתור Instructions עם תמונה

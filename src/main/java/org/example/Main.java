@@ -9,13 +9,17 @@ public class Main {
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Space Game");
+
         window.setSize(WIDTH, HEIGHT);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setLayout(null);
         window.setResizable(false);
 
+        JFrame instructions = new JFrame("Instructions");
+
         SpaceBackground background = new SpaceBackground();
+        Instructions instructionspanel = new Instructions();
 
         // שימוש במערך כדי שנוכל לגשת ל-startScreen בתוך הלמבדות
         StartScreen[] startScreen = new StartScreen[1];
@@ -31,9 +35,16 @@ public class Main {
                     background.startGame();
                 },
                 e -> {
-                    // לוגיקה עבור כפתור Instructions
-                    JOptionPane.showMessageDialog(window,
-                            "הוראות המשחק:\nהזז את החללית עם החצים\nירה עם מקש רווח!");
+                    instructions.setSize(1000, 600);
+                    instructions.setLocationRelativeTo(null);
+                    instructions.setLayout(null);
+                    instructions.setResizable(false);
+                    instructions.setVisible(true);
+                    instructions.add(instructionspanel);
+                    instructions.revalidate();
+                    instructions.repaint();
+
+
                 }
         );
 
