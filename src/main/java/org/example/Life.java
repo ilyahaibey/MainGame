@@ -10,14 +10,11 @@ public class Life extends JPanel {
     public static final int X= 0;
     public static final int Y=0;
 
-
     private int y = Y_LOCATION ;
     private int x ;
     private  int width = WIDTH ;
     private int  height = HEIGHT ;
-    private JPanel parent ;
     private Image life ;
-
 
     public Life(int x ) {
         this.x = x ;

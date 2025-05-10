@@ -23,7 +23,6 @@ public class Sound {
         }
     }
 
-
     public void explosionSound(){// מנגן את הצליל פעם אחת
         if (clip != null) {
             clip.setFramePosition(0); // מחזיר את הנגן להתחלה (כדי שיתנגן מההתחלה)

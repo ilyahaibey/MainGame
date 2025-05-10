@@ -18,9 +18,6 @@ public class ObstacleOfAsteroid extends JPanel {
     private int counterOfShooting = 0;
     private Image currentImage;
 
-
-
-
     public ObstacleOfAsteroid(JPanel parent, int speed) {
         this.speed= speed;
         this.parent = parent;
@@ -61,9 +58,7 @@ public class ObstacleOfAsteroid extends JPanel {
                     repaint();
                     changePhoto();
                 }
-//                parent.remove(this);
-//                repaint();
-                // מסיר
+
                 SwingUtilities.invokeLater(() -> {
                     if (parent.isAncestorOf(this)) {
                         parent.remove(this);
@@ -75,7 +70,6 @@ public class ObstacleOfAsteroid extends JPanel {
                 throw new RuntimeException(e);
 
             }
-
         }).start();
     }
 
@@ -107,9 +101,7 @@ public class ObstacleOfAsteroid extends JPanel {
             this.currentImage = AsteroidPhotoTree ;
         }
 
-
     }
-
 
 }
 

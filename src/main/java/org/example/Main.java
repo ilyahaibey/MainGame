@@ -44,7 +44,6 @@ public class Main {
                     instructions.revalidate();
                     instructions.repaint();
 
-
                 }
         );
 

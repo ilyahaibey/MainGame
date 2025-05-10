@@ -11,7 +11,6 @@ public class Xp extends JPanel {
     public static final int WHIDHT = 1000 ;
 
 
-
     private int xp ;
     private int x = X ;
     private int y = Y ;

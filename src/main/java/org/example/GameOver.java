@@ -17,31 +17,11 @@ public class GameOver extends JPanel {
 
     
     private Image gameOverImage;
-//    private JPanel perent;
-
 
     public GameOver() {
         gameOverImage = new ImageIcon(getClass().getResource("/gameover1.png")).getImage();
         this.setLayout(null);
         this.setBounds(X, Y,WIDTH, HEIGHT);
-//        JButton playAgain = new JButton("play again");
-//        playAgain.setFont(new Font("Arial", Font.BOLD, 30));
-//        playAgain.setLayout(null);
-//        playAgain.setBounds(500, 50, 300, 100);
-//        this.add(playAgain);
-//
-//        playAgain.addActionListener(e -> {
-//
-//            JFrame window = (JFrame) SwingUtilities.getWindowAncestor(this);
-//            window.getContentPane().removeAll();
-//
-//            SpaceBackground newGame = new SpaceBackground();
-//            window.add(newGame);
-//            window.revalidate();
-//            window.repaint();
-//            newGame.requestFocusInWindow();
-//            newGame.startGame(); // מתחיל את המשחק מחדש
-//        });
 
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/buttom.png")); // טוען את התמונה המקורית
         Image img = originalIcon.getImage();
@@ -73,6 +53,5 @@ public class GameOver extends JPanel {
         super.paintComponent(g);
         g.drawImage(gameOverImage, X, Y, getWidth(), getHeight(), this);
     }
-
 
 }
