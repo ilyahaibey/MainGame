@@ -15,10 +15,8 @@ public class GameOver extends JPanel {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 700;
 
-
+    
     private Image gameOverImage;
-//    private JPanel perent;
-
 
     public GameOver() {
         gameOverImage = new ImageIcon(getClass().getResource("/gameover1.png")).getImage();
@@ -55,4 +53,5 @@ public class GameOver extends JPanel {
         super.paintComponent(g);
         g.drawImage(gameOverImage, X, Y, getWidth(), getHeight(), this);
     }
+
 }

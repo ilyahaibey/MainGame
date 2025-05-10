@@ -46,7 +46,6 @@ public class StartScreen extends JPanel {
         background.add(startButton);
 
 
-
         // כפתור Instructions עם תמונה
         ImageIcon originalInstructionsIcon = new ImageIcon(getClass().getResource("/INSTRUCTIONS.png"));
         Image imgInstructions = originalInstructionsIcon.getImage();

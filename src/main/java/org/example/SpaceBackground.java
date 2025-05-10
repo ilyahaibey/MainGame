@@ -46,9 +46,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         treeLife();
         repaint();
 
-
     }
-
 
     private void startMovementThread() {
         new Thread(() -> {
@@ -72,7 +70,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
             }
         }).start();
     }
-
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -220,11 +217,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
                             }
                         }
                     }
-                    // מסיר יריות
-                    // הסרת יריות
-//                    for (Gunshot shot : shotsToRemove) {
-//                        shots.remove(shot);
-//                        remove(shot);
+
                     for (Gunshot shot : shotsToRemove) {
                         shots.remove(shot);
                         SwingUtilities.invokeLater(() -> {
@@ -232,13 +225,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
                             repaint();
                         });
                     }
-                    // הסרת אסטרואידים
-                    // הסרת אסטרואידים
-//                    for (ObstacleOfAsteroid asteroid : asteroidsToRemove) {
-//                        asteroids.remove(asteroid);
-//                        remove(asteroid);
-//                        xp.addXp();
-                    /// הוספרת אסטרואידים
+
                     for (ObstacleOfAsteroid asteroid : asteroidsToRemove) {
                         asteroids.remove(asteroid);
                         SwingUtilities.invokeLater(() -> {
@@ -255,7 +242,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
                             }
                             repaint();
                         });
-
                     }
                     repaint(); // עדכון גרפי
                     Thread.sleep(20);
@@ -282,16 +268,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
             }
             repaint();
         });
-//        for (int i = asteroids.size() - 1; i >= 0; i--) {
-//            ObstacleOfAsteroid curentAsteroid = asteroids.get(i);
-//            this.remove(curentAsteroid);   // הסרה מהמסך
-//            ObstacleOfAsteroid asteroidToRemove = curentAsteroid;
-//            SwingUtilities.invokeLater(() -> {
-//                remove(asteroidToRemove);
-//            });
-//            asteroids.remove(i);     // הסרה מהלוגיקה
-//        }
-//        repaint();  // רענון אחרי הכל
+
     }
 
     /// כפתור התחלה
@@ -300,6 +277,5 @@ public class SpaceBackground extends JPanel implements KeyListener {
         playerDead(); // מתחיל לבדוק התנגשות
         hittingInAsteroid(); // בודק התנגשות כדור בסטרואיד
     }
-
 
 }
