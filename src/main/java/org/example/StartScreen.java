@@ -54,6 +54,7 @@ public class StartScreen extends JPanel {
 //        startButton.setBounds(450, 450, 300, 70);
 //        startButton.addActionListener(onStartClicked);
 //        background.add(startButton);
+        ///
 
 
         // כפתור Instructions עם תמונה
