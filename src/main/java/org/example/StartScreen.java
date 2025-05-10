@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class StartScreen extends JPanel {
-    // משתניפ קבועים לכותרת
+    // משתנים קבועים לכותרת
     public static final int TITLE_WIDTH = 500;
     public static final int TITLE_HEIGHT = 300;
     public static final int TITLE_X = (1200 - TITLE_WIDTH) / 2;
@@ -29,12 +29,7 @@ public class StartScreen extends JPanel {
         JLabel titleImage = new JLabel(new ImageIcon(scaledTitle));
         titleImage.setBounds(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
         background.add(titleImage);
-//
-//        JLabel title = new JLabel("SPACE ADVENTURE");
-//        title.setFont(new Font("Arial", Font.BOLD, 50));
-//        title.setForeground(Color.WHITE);
-//        title.setBounds(350, 100, 800, 60);
-//        background.add(title);
+
 
         // כפתור Start Game עם תמונה
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/buttom_StartGame.png"));
@@ -49,12 +44,6 @@ public class StartScreen extends JPanel {
         startButton.setFocusPainted(false);
         startButton.addActionListener(onStartClicked);
         background.add(startButton);
-//        JButton startButton = new JButton("Start Game");
-//        startButton.setFont(new Font("Arial", Font.BOLD, 30));
-//        startButton.setBounds(450, 450, 300, 70);
-//        startButton.addActionListener(onStartClicked);
-//        background.add(startButton);
-        ///
 
 
         // כפתור Instructions עם תמונה
@@ -71,12 +60,6 @@ public class StartScreen extends JPanel {
         instructionsB.addActionListener(onInstructionsClicked);
         background.add(instructionsB);
 
-
-//        JButton instructionsB = new JButton("Instructions");
-//        instructionsB.setFont(new Font("Arial", Font.BOLD, 30));
-//        instructionsB.setBounds(450, 560, 300, 70);
-//        instructionsB.addActionListener(onInstructionsClicked);
-//        background.add(instructionsB);
     }
 }
 

@@ -98,11 +98,11 @@ public class SpaceBackground extends JPanel implements KeyListener {
 // הורדה
         if (key == KeyEvent.VK_SPACE) {
             Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
-            shots.add(shot);
+            shots   .add(shot);
             this.add(shot);
             shot.shotFromPlayer();
-            //  Sound gunSound = new Sound("/ירי.wav");
-            // gunSound.explosionSound();
+              Sound gunSound = new Sound(" ");
+             gunSound.explosionSound();
             repaint();
             //
             keysPressed.add(e.getKeyCode());
@@ -212,8 +212,8 @@ public class SpaceBackground extends JPanel implements KeyListener {
                                 shotsToRemove.add(shot);
 
                                 if (asteroid.getCounterOfShooting() >= 9 && !asteroidsToRemove.contains(asteroid)) { //בורקאם זה לא סופר פעמיים את האסטרואיד
-                                    // Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
-                                    //explosion.explosionSound();
+                                     Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
+                                    explosion.explosionSound();
                                     asteroidsToRemove.add(asteroid);
 
                                 }

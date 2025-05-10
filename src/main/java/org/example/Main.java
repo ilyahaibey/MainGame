@@ -41,4 +41,6 @@ public class Main {
         window.add(startScreen[0]);
         window.setVisible(true);
     }
+//    Sound sound=new Sound();
+//    Sound
 }
