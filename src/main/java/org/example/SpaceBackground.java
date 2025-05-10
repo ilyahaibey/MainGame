@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class SpaceBackground extends JPanel implements KeyListener {
     private final java.util.Set<Integer> keysPressed = new java.util.HashSet<>();
-    private boolean canShoot = true;
     private Image backgroundImage;
     private Player playerRocet;
     private ArrayList<Gunshot> shots;
@@ -16,6 +15,9 @@ public class SpaceBackground extends JPanel implements KeyListener {
     private ArrayList<Life> lifes;
     private Xp xp;
     private boolean gameOverShown = false;
+    private int asteroidSpeed = 7;
+    private int lastLevelChecked = 0;
+
 
     public SpaceBackground() {
         backgroundImage = new ImageIcon(getClass().getResource("/space1.png")).getImage();
@@ -40,61 +42,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.requestFocusInWindow();
 
-        //באג
-//        new Thread(() -> {
-//            try {
-//                while (true) {
-//                    int dx = 0, dy = 0;
-//
-//                    if (keysPressed.contains(KeyEvent.VK_LEFT)) dx = -1;
-//                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) dx = 1;
-//                    if (keysPressed.contains(KeyEvent.VK_UP)) dy = -1;
-//                    if (keysPressed.contains(KeyEvent.VK_DOWN)) dy = 1;
-//
-//                    if (dx != 0 || dy != 0) {
-//                        playerRocet.move(dx, dy);
-//                    }
-//
-//                    Thread.sleep(20);
-//                }
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//            }
-//        }).start();
-
-//        new Thread(() -> {
-//            try {
-//                while (true) {
-//                    if (keysPressed.contains(KeyEvent.VK_SPACE) && canShoot) {
-//                        canShoot = false;
-//
-//                        Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
-//                        shots.add(shot);
-//                        this.add(shot);
-//                        shot.shotFromPlayer();
-//
-//                        Sound gunSound = new Sound("src/main/resources/פיצוץ.wav");
-//                        gunSound.explosionSound();
-//
-//                        repaint();
-//
-//                        // מחכים קצת ואז מתירים ירי נוסף
-//                        new Thread(() -> {
-//                            try {
-//                                Thread.sleep(300); // זמן המתנה לפני שירייה נוספת מותרת
-//                                canShoot = true;
-//                            } catch (InterruptedException e) {
-//                                Thread.currentThread().interrupt();
-//                            }
-//                        }).start();
-//                    }
-//
-//                    Thread.sleep(10); // בדיקה מהירה אם רווח לחוץ
-//                }
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//            }
-//        }).start();
         startMovementThread();
         treeLife();
         repaint();
@@ -127,7 +74,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
     }
 
 
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
@@ -155,8 +101,8 @@ public class SpaceBackground extends JPanel implements KeyListener {
             shots.add(shot);
             this.add(shot);
             shot.shotFromPlayer();
-          //  Sound gunSound = new Sound("/ירי.wav");
-           // gunSound.explosionSound();
+            //  Sound gunSound = new Sound("/ירי.wav");
+            // gunSound.explosionSound();
             repaint();
             //
             keysPressed.add(e.getKeyCode());
@@ -175,7 +121,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         new Thread(() -> {
             try {
                 while (!gameOverShown) {
-                    ObstacleOfAsteroid asteroid = new ObstacleOfAsteroid(this);
+                    ObstacleOfAsteroid asteroid = new ObstacleOfAsteroid(this, asteroidSpeed);
                     asteroids.add(asteroid);
                     this.add(asteroid);
                     asteroid.addInAsteroid();
@@ -265,31 +211,54 @@ public class SpaceBackground extends JPanel implements KeyListener {
                                 asteroid.counter();
                                 shotsToRemove.add(shot);
 
-                                if (asteroid.getCounterOfShooting() >= 9) {
-                                   // Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
+                                if (asteroid.getCounterOfShooting() >= 9 && !asteroidsToRemove.contains(asteroid)) { //בורקאם זה לא סופר פעמיים את האסטרואיד
+                                    // Sound explosion = new Sound("src/main/resources/פיצוץ.wav");
                                     //explosion.explosionSound();
                                     asteroidsToRemove.add(asteroid);
+
                                 }
                             }
                         }
                     }
+                    // מסיר יריות
                     // הסרת יריות
+//                    for (Gunshot shot : shotsToRemove) {
+//                        shots.remove(shot);
+//                        remove(shot);
                     for (Gunshot shot : shotsToRemove) {
                         shots.remove(shot);
-                        remove(shot);
+                        SwingUtilities.invokeLater(() -> {
+                            remove(shot);
+                            repaint();
+                        });
                     }
-
                     // הסרת אסטרואידים
+                    // הסרת אסטרואידים
+//                    for (ObstacleOfAsteroid asteroid : asteroidsToRemove) {
+//                        asteroids.remove(asteroid);
+//                        remove(asteroid);
+//                        xp.addXp();
+                    /// הוספרת אסטרואידים
                     for (ObstacleOfAsteroid asteroid : asteroidsToRemove) {
                         asteroids.remove(asteroid);
-                        remove(asteroid);
-                        xp.addXp();
+                        SwingUtilities.invokeLater(() -> {
+                            if (isAncestorOf(asteroid)) {
+                                remove(asteroid);
+                                xp.addXp();
+                                repaint();
+                            }
+
+                            int currentXp = xp.getXp();
+                            if (currentXp >= 50 && currentXp / 50 > lastLevelChecked) {
+                                asteroidSpeed += 1;
+                                lastLevelChecked = currentXp / 50;
+                            }
+                            repaint();
+                        });
 
                     }
-
                     repaint(); // עדכון גרפי
                     Thread.sleep(20);
-
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -298,14 +267,34 @@ public class SpaceBackground extends JPanel implements KeyListener {
     }
 
     public void removeAllAsteroid() {
-        for (int i = asteroids.size() - 1; i >= 0; i--) {
-            ObstacleOfAsteroid curentAsteroid = asteroids.get(i);
-            this.remove(curentAsteroid);   // הסרה מהמסך
-            asteroids.remove(i);     // הסרה מהלוגיקה
-        }
-        repaint();  // רענון אחרי הכל
+        // אוספים את כל האסטרואידים שצריך להסיר לרשימה זמנית
+        ArrayList<ObstacleOfAsteroid> toRemove = new ArrayList<>(asteroids);
+
+        // הסרה לוגית מהמערכת
+        asteroids.clear();
+
+        // הסרה מהמסך ב-EDT
+        SwingUtilities.invokeLater(() -> {
+            for (ObstacleOfAsteroid asteroid : toRemove) {
+                if (isAncestorOf(asteroid)) {
+                    remove(asteroid);
+                }
+            }
+            repaint();
+        });
+//        for (int i = asteroids.size() - 1; i >= 0; i--) {
+//            ObstacleOfAsteroid curentAsteroid = asteroids.get(i);
+//            this.remove(curentAsteroid);   // הסרה מהמסך
+//            ObstacleOfAsteroid asteroidToRemove = curentAsteroid;
+//            SwingUtilities.invokeLater(() -> {
+//                remove(asteroidToRemove);
+//            });
+//            asteroids.remove(i);     // הסרה מהלוגיקה
+//        }
+//        repaint();  // רענון אחרי הכל
     }
-/// כפתור התחלה
+
+    /// כפתור התחלה
     public void startGame() {
         addAsteroids(); // מתחיל להציף אסטרואידים
         playerDead(); // מתחיל לבדוק התנגשות

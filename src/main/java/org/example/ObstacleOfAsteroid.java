@@ -13,7 +13,7 @@ public class ObstacleOfAsteroid extends JPanel {
     private Image AsteroidPhotoTree;
     private int width;
     private int height;
-    private int speed = 7;
+    private int speed;
     private JPanel parent;
     private int counterOfShooting = 0;
     private Image currentImage;
@@ -21,7 +21,8 @@ public class ObstacleOfAsteroid extends JPanel {
 
 
 
-    public ObstacleOfAsteroid(JPanel parent) {
+    public ObstacleOfAsteroid(JPanel parent, int speed) {
+        this.speed= speed;
         this.parent = parent;
         Random random = new Random();
 
@@ -60,8 +61,15 @@ public class ObstacleOfAsteroid extends JPanel {
                     repaint();
                     changePhoto();
                 }
-                parent.remove(this);
-                repaint();
+//                parent.remove(this);
+//                repaint();
+                // מסיר
+                SwingUtilities.invokeLater(() -> {
+                    if (parent.isAncestorOf(this)) {
+                        parent.remove(this);
+                        parent.repaint();
+                    }
+                });
 
             } catch (Exception e) {
                 throw new RuntimeException(e);

@@ -19,7 +19,7 @@ public class Life extends JPanel {
     private Image life ;
 
 
-    public Life(int x  ) {
+    public Life(int x ) {
         this.x = x ;
 
         life = new ImageIcon(getClass().getResource("/lev.png")).getImage();

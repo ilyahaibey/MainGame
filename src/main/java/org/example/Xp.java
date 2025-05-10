@@ -41,4 +41,7 @@ public class Xp extends JPanel {
 
     }
 
+    public int getXp() {
+        return this.xp;
+    }
 }

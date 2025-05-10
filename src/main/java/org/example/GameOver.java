@@ -21,7 +21,7 @@ public class GameOver extends JPanel {
 
 
     public GameOver() {
-        gameOverImage = new ImageIcon(getClass().getResource("/gameover.png")).getImage();
+        gameOverImage = new ImageIcon(getClass().getResource("/gameover1.png")).getImage();
         this.setLayout(null);
         this.setBounds(X, Y,WIDTH, HEIGHT);
 //        JButton playAgain = new JButton("play again");
@@ -42,6 +42,7 @@ public class GameOver extends JPanel {
 //            newGame.requestFocusInWindow();
 //            newGame.startGame(); // מתחיל את המשחק מחדש
 //        });
+
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/buttom.png")); // טוען את התמונה המקורית
         Image img = originalIcon.getImage();
         Image scaledImg = img.getScaledInstance(WIDTH_PLAYAGAIN,HEIGHT_PLAYAGAIN, Image.SCALE_SMOOTH); // מקטין לגודל הכפתור
