@@ -78,7 +78,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        keysPressed.add(key); // שומר את המקש הלחוץ (גם לתנועה)
+        keysPressed.add(key);
         if (key == KeyEvent.VK_LEFT) {
             playerRocet.move(-1, 0);
         }
@@ -92,7 +92,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
             playerRocet.move(0, 1);
         }
 
-// הורדה
         if (key == KeyEvent.VK_SPACE) {
             Gunshot shot = new Gunshot(playerRocet.getX() + 25, playerRocet.getY() + 40, this);
             shots   .add(shot);
@@ -111,7 +110,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
         keysPressed.remove(e.getKeyCode());
     }
 
-    public void keyTyped(KeyEvent e) {//לא לחוץ
+    public void keyTyped(KeyEvent e) {
     }
 
     public void addAsteroids() {
@@ -123,7 +122,6 @@ public class SpaceBackground extends JPanel implements KeyListener {
                     this.add(asteroid);
                     asteroid.addInAsteroid();
 
-                    // מסיר אסטרואידים שיצאו מהמסך
                     asteroids.removeIf(ObstacleOfAsteroid::isOutOfScreen);
                     repaint();
 
@@ -170,10 +168,10 @@ public class SpaceBackground extends JPanel implements KeyListener {
                     if (lifes.isEmpty()) {
                         gameOverShown = true;
                         GameOver gameOver = new GameOver();
-                        this.removeAll(); // מסיר את כל הרכיבים הקודמים
-                        this.add(gameOver); // מוסיף את מסך הסיום
-                        this.revalidate();  // מרנדר מחדש את מבנה הפאנלים
-                        this.repaint();     // מצייר מחדש
+                        this.removeAll();
+                        this.add(gameOver);
+                        this.revalidate();
+                        this.repaint();
                     }
 
                     Thread.sleep(20);
@@ -244,7 +242,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
                             repaint();
                         });
                     }
-                    repaint(); // עדכון גרפי
+                    repaint();
                     Thread.sleep(20);
                 }
             } catch (InterruptedException e) {
@@ -254,13 +252,10 @@ public class SpaceBackground extends JPanel implements KeyListener {
     }
 
     public void removeAllAsteroid() {
-        // אוספים את כל האסטרואידים שצריך להסיר לרשימה זמנית
         ArrayList<ObstacleOfAsteroid> toRemove = new ArrayList<>(asteroids);
 
-        // הסרה לוגית מהמערכת
         asteroids.clear();
 
-        // הסרה מהמסך ב-EDT
         SwingUtilities.invokeLater(() -> {
             for (ObstacleOfAsteroid asteroid : toRemove) {
                 if (isAncestorOf(asteroid)) {
@@ -272,11 +267,10 @@ public class SpaceBackground extends JPanel implements KeyListener {
 
     }
 
-    /// כפתור התחלה
     public void startGame() {
-        addAsteroids(); // מתחיל להציף אסטרואידים
-        playerDead(); // מתחיל לבדוק התנגשות
-        hittingInAsteroid(); // בודק התנגשות כדור בסטרואיד
+        addAsteroids();
+        playerDead();
+        hittingInAsteroid();
     }
 
 }

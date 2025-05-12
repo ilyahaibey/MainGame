@@ -36,7 +36,6 @@ public class ObstacleOfAsteroid extends JPanel {
         setLayout(null);
         setBounds(x, y, width, height);
         setOpaque(false);
-
     }
 
     protected void paintComponent(Graphics g) {
@@ -95,7 +94,6 @@ public class ObstacleOfAsteroid extends JPanel {
         if (this.counterOfShooting == 3){
             this.currentImage = AsteroidPhotoTwo ;
             repaint();
-
         }
         if (this.counterOfShooting == 6){
             this.currentImage = AsteroidPhotoTree ;

@@ -14,7 +14,6 @@ public class GameOver extends JPanel {
     public static final int HEIGHT_PLAYAGAIN = 220;
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 700;
-
     
     private Image gameOverImage;
 
@@ -23,16 +22,16 @@ public class GameOver extends JPanel {
         this.setLayout(null);
         this.setBounds(X, Y,WIDTH, HEIGHT);
 
-        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/buttom.png")); // טוען את התמונה המקורית
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/buttom.png"));
         Image img = originalIcon.getImage();
-        Image scaledImg = img.getScaledInstance(WIDTH_PLAYAGAIN,HEIGHT_PLAYAGAIN, Image.SCALE_SMOOTH); // מקטין לגודל הכפתור
-        ImageIcon scaledIcon = new ImageIcon(scaledImg); // יוצר תמונה חדשה מוקטנת
+        Image scaledImg = img.getScaledInstance(WIDTH_PLAYAGAIN,HEIGHT_PLAYAGAIN, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImg);
 
-        JButton playAgain = new JButton(scaledIcon); // יוצר כפתור עם תמונה בגודל נכון
-        playAgain.setBounds(X_PLAYAGAIN, Y_PLAYAGAIN, WIDTH_PLAYAGAIN, HEIGHT_PLAYAGAIN); // מיקום וגודל מותאם לראש המסך
-        playAgain.setContentAreaFilled(false); // לא למלא רקע
-        playAgain.setBorderPainted(false);     // בלי מסגרת
-        playAgain.setFocusPainted(false);      // בלי גבול כשנלחץ
+        JButton playAgain = new JButton(scaledIcon);
+        playAgain.setBounds(X_PLAYAGAIN, Y_PLAYAGAIN, WIDTH_PLAYAGAIN, HEIGHT_PLAYAGAIN);
+        playAgain.setContentAreaFilled(false);
+        playAgain.setBorderPainted(false);
+        playAgain.setFocusPainted(false);
 
         this.add(playAgain);
 

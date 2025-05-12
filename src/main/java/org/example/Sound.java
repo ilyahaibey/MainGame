@@ -1,19 +1,18 @@
 package org.example;
-import javax.sound.sampled.*;// מיבא מחלקה לניגון קבצי קול
+import javax.sound.sampled.*;
 import java.io.File;
 
 
 public class Sound {
-    private Clip clip; //  אובייקט מובנה  שמיצג צליל
+    private Clip clip;
 
     public Sound(String clips){
         try {
             clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(new File(clips)));// פותח את הקובץ ישירות מהנתיב שצויין
+            clip.open(AudioSystem.getAudioInputStream(new File(clips)));
         } catch (Exception e) {
-            System.out.println(clips+"שגיאה");
-        }
 
+        }
     }
 
     public void backgroundMusic() {
@@ -23,7 +22,6 @@ public class Sound {
                     clip.setFramePosition(0);
                     clip.start();
 
-                    // מחכה לסיום הצליל
                     while (clip.isRunning()) {
                         try {
                             Thread.sleep(100);
@@ -37,10 +35,10 @@ public class Sound {
     }
 
 
-    public void explosionSound(){// מנגן את הצליל פעם אחת
+    public void explosionSound(){
         if (clip != null) {
-            clip.setFramePosition(0); // מחזיר את הנגן להתחלה (כדי שיתנגן מההתחלה)
-            clip.start();             // התחל לנגן
+            clip.setFramePosition(0);
+            clip.start();
         }
     }
 

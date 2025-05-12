@@ -9,14 +9,13 @@ public class PlayerExplotion extends JPanel {
     public static final int X= 0;
     public static final int Y=0;
 
-    private Image[] explosions;      // מערך של תמונות הפיצוץ בשלבים
-    private int currentFrame = 0;    // באיזה שלב הפיצוץ אנחנו
-    private JPanel parent;           // הפאנל הראשי שעליו מצויר הפיצוץ
+    private Image[] explosions;
+    private int currentFrame = 0;
+    private JPanel parent;
 
     public PlayerExplotion(JPanel parent) {
         this.parent = parent;
 
-        // טוען את שלושת התמונות של הפיצוץ לתוך מערך
         explosions = new Image[]{
                 new ImageIcon(getClass().getResource("/explotion1.png")).getImage(),
                 new ImageIcon(getClass().getResource("/explotion2.png")).getImage(),
@@ -25,7 +24,7 @@ public class PlayerExplotion extends JPanel {
 
         setLayout(null);
         setBounds(X, Y, WIDTH, HEIGHT);
-        setOpaque(false); // חשוב כדי לא להסתיר דברים אחרים
+        setOpaque(false);
     }
 
     @Override
@@ -36,20 +35,18 @@ public class PlayerExplotion extends JPanel {
         }
     }
 
-    // כאן מתחילה האנימציה של הפיצוץ
     public void startExplosion(int x, int y) {
-        setBounds(x, y, WIDTH, HEIGHT); // מיקום על המסך לפי הפגיעה
-        parent.add(this);               // מוסיפים את הפיצוץ למסך
-        parent.setComponentZOrder(this, 0); // מביא קדימה למעלה
+        setBounds(x, y, WIDTH, HEIGHT);
+        parent.add(this);
+        parent.setComponentZOrder(this, 0);
 
         new Thread(() -> {
             try {
                 for (int i = 0; i < explosions.length; i++) {
-                    currentFrame = i; // מחליפים שלב
-                    repaint();        // מציירים את הפאנל מחדש
-                    Thread.sleep(150); // זמן בין שלבים (200 מילישניות)
+                    currentFrame = i;
+                    repaint();
+                    Thread.sleep(150);
                 }
-                // מסיימים - מסירים את הפאנל מהמסך
                 parent.remove(this);
                 parent.repaint();
 

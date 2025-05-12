@@ -18,21 +18,19 @@ public class Main {
 
         JFrame instructions = new JFrame("Instructions");
 
-
         SpaceBackground background = new SpaceBackground();
         Instructions instructionspanel = new Instructions();
 
-        // שימוש במערך כדי שנוכל לגשת ל-startScreen בתוך הלמבדות
         StartScreen[] startScreen = new StartScreen[1];
 
         startScreen[0] = new StartScreen(
                 e -> {
-                    // לוגיקה עבור כפתור Start Game
+
                     window.remove(startScreen[0]);
                     window.add(background);
                     window.revalidate();
                     window.repaint();
-                    background.requestFocusInWindow(); // כדי שהמקלדת תעבוד
+                    background.requestFocusInWindow();
                     background.startGame();
                 },
                 e -> {

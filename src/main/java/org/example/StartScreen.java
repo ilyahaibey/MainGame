@@ -18,12 +18,11 @@ public class StartScreen extends JPanel {
         setLayout(null);
         setBounds(0, 0, 1200, 700);
 
-        // רקע
         JLabel background = new JLabel(new ImageIcon(getClass().getResource("/manu.png")));
         background.setBounds(0, 0, 1200, 700);
         add(background);
 
-        // כותרת
+
         ImageIcon titleIcon = new ImageIcon(getClass().getResource("/Title.png"));
         Image scaledTitle = titleIcon.getImage().getScaledInstance(TITLE_WIDTH, TITLE_HEIGHT, Image.SCALE_SMOOTH);
         JLabel titleImage = new JLabel(new ImageIcon(scaledTitle));
@@ -31,7 +30,6 @@ public class StartScreen extends JPanel {
         background.add(titleImage);
 
 
-        // כפתור Start Game עם תמונה
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/buttom_StartGame.png"));
         Image img = originalIcon.getImage();
         Image scaledImg = img.getScaledInstance(400,TITLE_HEIGHT, Image.SCALE_SMOOTH);
@@ -46,14 +44,13 @@ public class StartScreen extends JPanel {
         background.add(startButton);
 
 
-        // כפתור Instructions עם תמונה
         ImageIcon originalInstructionsIcon = new ImageIcon(getClass().getResource("/INSTRUCTIONS.png"));
         Image imgInstructions = originalInstructionsIcon.getImage();
         Image scaledInstructionsImg = imgInstructions.getScaledInstance(400, 350, Image.SCALE_SMOOTH);
         ImageIcon scaledInstructionsIcon = new ImageIcon(scaledInstructionsImg);
 
         JButton instructionsB = new JButton(scaledInstructionsIcon);
-        instructionsB.setBounds((1200 - 400) / 2, 480, 400, 120); // היה קודם 580
+        instructionsB.setBounds((1200 - 400) / 2, 480, 400, 120);
         instructionsB.setContentAreaFilled(false);
         instructionsB.setBorderPainted(false);
         instructionsB.setFocusPainted(false);
