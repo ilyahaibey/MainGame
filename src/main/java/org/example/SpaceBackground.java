@@ -98,7 +98,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
             shots   .add(shot);
             this.add(shot);
             shot.shotFromPlayer();
-              Sound gunSound = new Sound(" ");
+              Sound gunSound = new Sound("src/main/resources/cochise-type-space-gun-sfx.wav ");
              gunSound.explosionSound();
             repaint();
             //
@@ -144,7 +144,8 @@ public class SpaceBackground extends JPanel implements KeyListener {
                             if (playerRocet.getBounds().intersects(asteroid.getBounds())) {
 
                                 PlayerExplotion explosion = new PlayerExplotion(this);
-
+                                Sound playerExplosionSound = new Sound("src/main/resources/retro-game-sfx-space-fall (1).wav");
+                                playerExplosionSound.explosionSound();
                                 add(explosion);
                                 explosion.startExplosion(playerRocet.getX(), playerRocet.getY());
 

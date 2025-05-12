@@ -18,6 +18,7 @@ public class Main {
 
         JFrame instructions = new JFrame("Instructions");
 
+
         SpaceBackground background = new SpaceBackground();
         Instructions instructionspanel = new Instructions();
 
@@ -48,9 +49,11 @@ public class Main {
         );
 
         startScreen[0].setBounds(0, 0, WIDTH, HEIGHT);
+
         window.add(startScreen[0]);
+        Sound sound =new Sound("src/main/resources/רקע.wav");
+        sound.backgroundMusic();
         window.setVisible(true);
     }
-//    Sound sound=new Sound();
-//    Sound
+
 }

@@ -16,12 +16,26 @@ public class Sound {
 
     }
 
-    public void backgroundMusic(){// מתודה למוזיקת רקע
-        if(clip!=null){// רק אם הצליל נטען בהצלחה
-            clip.loop(Clip.LOOP_CONTINUOUSLY);// מגדיר לנגן שוב ושוב בלי סוף
-            clip.start(); // התחל לנגן
+    public void backgroundMusic() {
+        if (clip != null) {
+            new Thread(() -> {
+                while (true) {
+                    clip.setFramePosition(0);
+                    clip.start();
+
+                    // מחכה לסיום הצליל
+                    while (clip.isRunning()) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            break;
+                        }
+                    }
+                }
+            }).start();
         }
     }
+
 
     public void explosionSound(){// מנגן את הצליל פעם אחת
         if (clip != null) {
@@ -29,16 +43,5 @@ public class Sound {
             clip.start();             // התחל לנגן
         }
     }
-
-    // עוצר את הצליל – מתאים כשרוצים לעצור את מוזיקת הרקע או צליל מתמשך
-    public void stop() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop(); // עצור את הצליל
-        }
-    }
-    public Clip getClip() {
-        return clip;
-    }
-
 
 }
