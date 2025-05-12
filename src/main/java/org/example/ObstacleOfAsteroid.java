@@ -74,8 +74,8 @@ public class ObstacleOfAsteroid extends JPanel {
 
     @Override
     public Rectangle getBounds() {
-        int offsetX = (int) (width * 0.15);  // 15% מהצדדים
-        int offsetY = (int) (height * 0.15); // 15% מלמעלה ומלמטה
+        int offsetX = (int) (width * 0.15);
+        int offsetY = (int) (height * 0.15);
         int reducedWidth = width - 2 * offsetX;
         int reducedHeight = height - 2 * offsetY;
         return new Rectangle(getX() + offsetX, getY() + offsetY, reducedWidth, reducedHeight);
