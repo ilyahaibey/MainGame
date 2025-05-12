@@ -20,11 +20,11 @@ public class Player extends JPanel   {
 
     public Player() {
 
-        this.width = 150;   // רוחב
-        this.height = 150;  // אורך
+        this.width = 150;
+        this.height = 150;
         this.y = 700 - height;
         this.x = (1200 - width) / 2;
-        this.speed = 25;    // מהירות
+        this.speed = 25;
         this.lives = 3;
 
         playerImage = new ImageIcon(getClass().getResource("/sapceship.png")).getImage();

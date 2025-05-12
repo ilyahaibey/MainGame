@@ -37,7 +37,6 @@ public class Xp extends JPanel {
     public void addXp(){
         this.xp+=10 ;
         this.xpText.setText("XP : "+String.valueOf(this.xp));
-
     }
 
     public int getXp() {
