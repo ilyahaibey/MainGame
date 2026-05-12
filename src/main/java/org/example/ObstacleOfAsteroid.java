@@ -29,9 +29,16 @@ public class ObstacleOfAsteroid extends JPanel {
 
         this.currentImage = AsteroidPhoto ;
 
-        this.x = random.nextInt(0, 1200);
         this.height = random.nextInt(100, 200);
         this.width = random.nextInt(100, 200);
+
+        int maxX = parent.getWidth() - this.width;
+
+        if (maxX < 0) {
+            maxX = 0;
+        }
+
+        this.x = random.nextInt(0, maxX + 1);
         this.y = -height;
         setLayout(null);
         setBounds(x, y, width, height);
@@ -49,27 +56,24 @@ public class ObstacleOfAsteroid extends JPanel {
     }
 
     public void addInAsteroid() {
-        new Thread(() -> {
-            try {
-                while (!isOutOfScreen()) {
-                    this.setLocation(getX(), getY() + speed);
-                    Thread.sleep(FALL_DELAY_MS);
-                    repaint();
-                    changePhoto();
+        Timer timer = new Timer(20, e -> {
+
+            if (!isOutOfScreen()) {
+                setLocation(getX(), getY() + speed);
+                changePhoto();
+
+                parent.repaint();
+            } else {
+                ((Timer) e.getSource()).stop();
+
+                if (parent.isAncestorOf(this)) {
+                    parent.remove(this);
+                    parent.repaint();
                 }
-
-                SwingUtilities.invokeLater(() -> {
-                    if (parent.isAncestorOf(this)) {
-                        parent.remove(this);
-                        parent.repaint();
-                    }
-                });
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-
             }
-        }).start();
+        });
+
+        timer.start();
     }
 
     @Override

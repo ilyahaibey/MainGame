@@ -15,7 +15,7 @@ public class SpaceBackground extends JPanel implements KeyListener {
     private ArrayList<Life> lifes;
     private Xp xp;
     private boolean gameOverShown = false;
-    private int asteroidSpeed = 7;
+    private int asteroidSpeed = 3;
     private int lastLevelChecked = 0;
 
 
